@@ -1,0 +1,77 @@
+class ComplexNumber
+    
+    attr_reader :real, :imaginary
+    @@addoperation = 0
+    @@multiplyoperation = 0
+  
+    def initialize(real, imaginary)
+        @real = real
+        @imaginary = imaginary
+      end
+    
+ 
+  
+      def +(other)
+        @@addoperation +=1
+        new_real = real + other.real 
+        new_imaginary = imaginary + other.imaginary
+        result = ComplexNumber.new( new_real,new_imaginary)
+      end
+      
+
+    
+  
+      def *(other)
+        @@multiplyoperation +=1
+        new_real=(real * other.real) - (imaginary * other.imaginary)
+        new_imaginary=(real * other.imaginary) + (imaginary * other.real)
+        result = ComplexNumber.new(new_real,new_imaginary)
+       end
+
+    def self.bulk_add(other)
+      sum_real = 0
+      sum_imag = 0
+      other.each do |complex_number|
+          sum_real += complex_number.real
+          sum_imag += complex_number.imaginary
+      end
+      result = ComplexNumber.new(sum_real, sum_imag)
+      end
+
+      
+      def self.bulk_multiply(complex_numbers)
+        
+        result = complex_numbers[0]
+        for num in 1...complex_numbers.length
+            
+            result = result.*(complex_numbers[num])
+        end
+        result
+    end
+  
+    def to_s
+        "#{self.real} + #{self.imaginary}i"
+    end
+    
+
+    def self.get_state()
+      puts "No. Add Operation: #{@@addoperation}"
+      puts "No. Multiply Operation: #{@@multiplyoperation}"
+    end
+ 
+end  
+
+complex1=ComplexNumber.new(1,2)
+complex2=ComplexNumber.new(3,4)
+complex3=ComplexNumber.new(5,6)
+sum=complex1+complex2
+print(complex1.+(complex2),"\n")
+multiplication=complex1*complex2
+print(complex1.*(complex2),"\n")
+arr = [complex1, complex2, complex3]
+print (ComplexNumber.bulk_add(arr)),"\n"
+print (ComplexNumber.bulk_multiply(arr)),"\n"
+ComplexNumber.get_state()
+
+
+
