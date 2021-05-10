@@ -65,3 +65,10 @@ gem 'devise'
 
 gem 'bootstrap-sass'
 
+gem "active_model_serializers", "~> 0.8.0"
+
+gem 'bcrypt', '~> 3.1.7'
+gem 'rack-cors'
+gem 'jwt'
+
+gem 'cancancan'
